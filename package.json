@@ -1,0 +1,30 @@
+{
+  "name": "cronvalidator",
+  "version": "1.0.0",
+  "description": "AWS expression cron expresssion Validation",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "AWS_Cron_Validation"
+  },
+  "keywords": [
+    "cron"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "jstreemap": "^1.28.2",
+    "string-tokenizer": "0.0.8"
+  }
+}
