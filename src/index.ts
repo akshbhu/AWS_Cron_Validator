@@ -1,5 +1,5 @@
 import {CronExpression} from './cronExpression'
-const cron = '* * * * * *' ;
+const cron = '10 15 10 * 1-JAN ?' ;
 console.log('helloworld');
 console.log(isValidCronExpression(cron));
 

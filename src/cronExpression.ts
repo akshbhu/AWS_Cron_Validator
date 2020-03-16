@@ -148,6 +148,22 @@ export class CronExpression{
             if (exprOn <= YEAR) {
                 this.storeExpressionVals(0, "*", YEAR);
             }
+            let dow : TreeSet<number> = this.getSet(DAY_OF_WEEK);
+
+            let dom : TreeSet<number> = this.getSet(DAY_OF_MONTH);
+
+            // Copying the logic from the UnsupportedOperationException below
+            let dayOfMSpec : boolean = !dom.has(NO_SPEC_INT);
+            let dayOfWSpec : boolean = !dow.has(NO_SPEC_INT);
+
+            if (dayOfMSpec && !dayOfWSpec) {
+                // skip
+            } else if (dayOfWSpec && !dayOfMSpec) {
+                // skip
+            } else {
+                throw new Error(
+                        "Specifying both a day-of-week AND a day-of-month parameter is not supported.");
+            }
 
         } catch (e) {
             throw new Error(e);
@@ -167,7 +183,7 @@ export class CronExpression{
             let eVal = -1;
             if (type === MONTH) {
                 sVal = this.getMonthNumber(sub) + 1;
-                if (sVal < 0) {
+                if (sVal <= 0) {
                     throw new Error("Invalid Month value: '" + sub
                             + "'" + String(i));
                 }
@@ -177,7 +193,7 @@ export class CronExpression{
                         i += 4;
                         sub = s.substring(i, i + 3);
                         eVal = this.getMonthNumber(sub) + 1;
-                        if (eVal < 0) {
+                        if (eVal <= 0) {
                             throw new Error("Invalid Month value: '"
                                     + sub + "'"+ String(i));
                         }
@@ -357,7 +373,7 @@ export class CronExpression{
     protected  getMonthNumber = function(s : String) : number {
         let integer : number =  monthMap.get(s);
 
-        if (integer === null) {
+        if (integer === undefined) {
             return -1;
         }
 
@@ -367,7 +383,7 @@ export class CronExpression{
     protected  getDayOfWeekNumber =  function(s : String) : number{
         let integer : number = dayMap.get(s);
 
-        if (integer === null) {
+        if (integer === undefined) {
             return -1;
         }
 
@@ -382,7 +398,7 @@ export class CronExpression{
                         "Minute and Second values must be between 0 and 59" + String(-1));
             }
         } else if (type === HOUR) {
-            if ((val < 0 || val > 23 || end > 23) && (val != ALL_SPEC_INT)) {
+            if ((val < 0 || val > 23  || end > 23) && (val != ALL_SPEC_INT)) {
                 throw new Error(
                         "Hour values must be between 0 and 23"+ String(-1));
             }

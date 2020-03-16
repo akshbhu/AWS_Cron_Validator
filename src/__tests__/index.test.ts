@@ -53,16 +53,28 @@ describe('check non valid crons', () => {
         expect(isValidCronExpression("10 15 10 * 0 ?")).toBeFalsy();
         expect(isValidCronExpression("10 15 10 * / ?")).toBeFalsy();
         expect(isValidCronExpression("10 15 10 * /13 ?")).toBeFalsy();
-        // expect(isValidCronExpression("15 10 * FOO ? *")).toBeFalsy();
-        //expect(isValidCronExpression("10 15 10 * 1,FOO,2 ?")).toBeFalsy();
-        //expect(isValidCronExpression("10 15 10 * JAN-FOO ?")).toBeFalsy();
-        //expect(isValidCronExpression("10 15 10 * 1-30 ?")).toBeFalsy();
-        // expect(isValidCronExpression("10 15 10 * JAN-3 ?")).toBeFalsy();
-        // expect(isValidCronExpression("10 15 10 * 1-JAN ?")).toBeFalsy();
+        expect(isValidCronExpression("15 10 * FOO ? *")).toBeFalsy();
+        expect(isValidCronExpression("10 15 10 * 1,FOO,2 ?")).toBeFalsy();
+        expect(isValidCronExpression("10 15 10 * JAN-FOO ?")).toBeFalsy();
+        expect(isValidCronExpression("10 15 10 * 1-30 ?")).toBeFalsy();
+        expect(isValidCronExpression("10 15 10 * JAN-3 ?")).toBeFalsy();
+        //expect(isValidCronExpression("10 15 10 * 1-JAN ?")).toBeFalsy();
         expect(isValidCronExpression("10 15 10 * ? ?")).toBeFalsy();
         expect(isValidCronExpression("10 15 10 * 1,? ?")).toBeFalsy();
-        // expect(isValidCronExpression("10 15 10 * W ?")).toBeFalsy();
-        // expect(isValidCronExpression("10 15 10 * 1,W ?")).toBeFalsy();
+        expect(isValidCronExpression("10 15 10 * W ?")).toBeFalsy();
+        expect(isValidCronExpression("10 15 10 * 1,W ?")).toBeFalsy();
+    });
+    it(" days of week invalid", () => {
+        expect(isValidCronExpression("0 15 10 ? * 9")).toBeFalsy();
+        expect(isValidCronExpression("0 15 10 ? * /")).toBeFalsy();
+        expect(isValidCronExpression("0 15 10 ? * /8")).toBeFalsy();
+        expect(isValidCronExpression("0 15 10 ? * FOO")).toBeFalsy();
+        expect(isValidCronExpression("0 15 10 ? * 1-9")).toBeFalsy();
+        expect(isValidCronExpression("0 15 10 ? * MON-FOO")).toBeFalsy();
+        expect(isValidCronExpression("0 15 10 ? * MON#6")).toBeFalsy();
+        expect(isValidCronExpression("0 15 10 ? * L6")).toBeFalsy();
+        expect(isValidCronExpression("0 15 10 ? * 6#6")).toBeFalsy();
+        expect(isValidCronExpression("0 15 10 ? * #3#4 2005")).toBeFalsy();
     });
 });
 

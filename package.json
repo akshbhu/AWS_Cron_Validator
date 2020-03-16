@@ -24,6 +24,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "collections": "^5.1.9",
     "jstreemap": "^1.28.2",
     "string-tokenizer": "0.0.8"
   }
